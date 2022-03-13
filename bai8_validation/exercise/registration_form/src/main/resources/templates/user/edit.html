@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <a href="/user">User list</a>
+</div>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/user/edit}" th:object="${userDto}" method="post">
+    <table>
+        <tr>
+            <td>Id</td>
+            <p th:text="userDto.id"></p>
+            <td><input type="hidden" th:field="*{id}"></td>
+            <small style="color: red" th:errors="*{id}"></small>
+        </tr>
+        <tr>
+            <td>Firstname</td>
+            <td><input type="text" th:field="*{firstname}"></td>
+            <small style="color: red" th:errors="*{firstname}"></small>
+        </tr>
+        <tr>
+            <td>Last name</td>
+            <td><input type="text" th:field="*{lastname}"></td>
+            <small style="color: red" th:errors="*{lastname}"></small>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td><input type="text" th:field="*{age}"></td>
+            <small style="color: red" th:errors="*{age}"></small>
+
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" th:field="*{email}"></td>
+            <small style="color: red" th:errors="*{email}"></small>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td><input type="date" th:field="*{phone}"></td>
+            <small style="color: red" th:errors="*{phone}"></small>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Create user" ></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
