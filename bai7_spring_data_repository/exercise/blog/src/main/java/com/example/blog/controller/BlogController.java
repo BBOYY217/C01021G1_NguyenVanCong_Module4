@@ -12,6 +12,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -81,22 +82,30 @@ public class BlogController {
         return modelAndView;
     }
 
-    @GetMapping("/delete/{id}")
-    public ModelAndView showDelete(@PathVariable Long id) {
-        Optional<Blog> blog = blogService.findById(id);
-        if (blog.isPresent()) {
-            ModelAndView modelAndView = new ModelAndView("/blog/delete");
-            modelAndView.addObject("blog", blog);
-            return modelAndView;
-        } else {
-            ModelAndView modelAndView = new ModelAndView("error.404");
-            return modelAndView;
-        }
-    }
+//    @GetMapping("/delete/{id}")
+//    public ModelAndView showDelete(@PathVariable Long id) {
+//        Optional<Blog> blog = blogService.findById(id);
+//        if (blog.isPresent()) {
+//            ModelAndView modelAndView = new ModelAndView("/blog/delete");
+//            modelAndView.addObject("blog", blog);
+//            return modelAndView;
+//        } else {
+//            ModelAndView modelAndView = new ModelAndView("error.404");
+//            return modelAndView;
+//        }
+//    }
+//
+//    @PostMapping("/delete")
+//    public String deleteBlog(@ModelAttribute("Blog") Blog blog) {
+//        blogService.remove(blog.getId());
+//        return "redirect:blogs";
+//    }
 
     @PostMapping("/delete")
-    public String deleteBlog(@ModelAttribute("Blog") Blog blog) {
-        blogService.remove(blog.getId());
-        return "redirect:blogs";
+    public String deleteEmployee(@RequestParam Long id, RedirectAttributes redirectAttributes ){
+        blogService.remove(id);
+        redirectAttributes.addFlashAttribute("massage","delete successfully");
+        return  "redirect:/blogs";
     }
+
 }

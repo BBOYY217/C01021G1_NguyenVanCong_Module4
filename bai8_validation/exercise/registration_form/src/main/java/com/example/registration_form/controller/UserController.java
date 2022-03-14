@@ -33,57 +33,55 @@ public class UserController {
         return modelAndView;
     }
 
-//    @GetMapping("/create")
-//    public ModelAndView showCreate(){
-//        ModelAndView modelAndView = new ModelAndView("/user/create",
-//                "userDto",new UserDto());
-//        return modelAndView;
-//    }
-
+    @GetMapping("/create")
+    public ModelAndView showCreate() {
+        ModelAndView modelAndView = new ModelAndView("/user/create",
+                "userDto", new UserDto());
+        return modelAndView;
+    }
     
-
-        @PostMapping("/create")
-    public String saveCreate(@ModelAttribute @Valid UserDto userDto, BindingResult bindingResult, RedirectAttributes redirectAttributes){
-        new UserDto().validate(userDto,bindingResult);
-        if (bindingResult.hasErrors()){
-            return "user/create";
+    @PostMapping("/create")
+    public String saveCreate(@ModelAttribute @Valid UserDto userDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new UserDto().validate(userDto, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "/user/create";
         }
         User user = new User();
-        BeanUtils.copyProperties(userDto,user);
+        BeanUtils.copyProperties(userDto, user);
         user.setFlag(true);
         userService.save(user);
-        redirectAttributes.addFlashAttribute("message","create successfully");
+        redirectAttributes.addFlashAttribute("message", "create successfully");
         return "redirect:/user";
     }
 
     @GetMapping("/edit")
-    public String showEdit(@RequestParam Long id, Model model){
+    public String showEdit(@RequestParam Long id, Model model) {
         User user = this.userService.findById(id).orElse(null);
         UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(user,userDto);
-        model.addAttribute("userDto",userDto);
+        BeanUtils.copyProperties(user, userDto);
+        model.addAttribute("userDto", userDto);
         return "user/edit";
     }
 
     @PostMapping("/edit")
-    public String editUser(@ModelAttribute @Valid UserDto userDto,BindingResult bindingResult,RedirectAttributes redirectAttributes){
-        new UserDto().validate(userDto,bindingResult);
-        if (bindingResult.hasErrors()){
+    public String editUser(@ModelAttribute @Valid UserDto userDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new UserDto().validate(userDto, bindingResult);
+        if (bindingResult.hasErrors()) {
             return "user/edit";
         }
         User user = new User();
-        BeanUtils.copyProperties(userDto,user);
+        BeanUtils.copyProperties(userDto, user);
         user.setFlag(true);
         userService.save(user);
-        redirectAttributes.addFlashAttribute("message","edit successfully");
+        redirectAttributes.addFlashAttribute("message", "edit successfully");
         return "redirect:/user";
     }
 
     @PostMapping("/delete")
-    public String deleteUser(@RequestParam Long id,RedirectAttributes redirectAttributes ){
+    public String deleteUser(@RequestParam Long id, RedirectAttributes redirectAttributes) {
         userService.remove(id);
-        redirectAttributes.addFlashAttribute("message","delete successfully");
-        return  "redirect:/user";
+        redirectAttributes.addFlashAttribute("message", "delete successfully");
+        return "redirect:/user";
     }
 
 }
