@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<a href="/create">Create new blog</a>
+<form>
+    Search by name:
+    <input name="search" type="text"/>
+    <input type="submit" value="Search"/>
+</form>
+<!--test-->
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--<script type="text/javascript">-->
+<!--    function searchBlog() {-->
+<!--        let search = $('#search').val();-->
+<!--        $('page').val(0);-->
+<!--        $.ajax({-->
+<!--            type: "GET",-->
+<!--            url: `/api/blogs/?search=${search}`,-->
+<!--            success: function (data) {-->
+<!--                tableBlog(data.content)-->
+<!--            }-->
+<!--        });-->
+<!--        event.preventDefault();-->
+<!--    }-->
+<!--    function tableBlog(blogs){-->
+<!--        let content = " <tr>\n" +-->
+<!--            "            <td>#</td>\n" +-->
+<!--            "            <td>Title</td>\n" +-->
+<!--            "            <td>Content</td>\n" +-->
+<!--            "            <td>Category</td>\n" +-->
+<!--            "            <td>Date</td>\n" +-->
+<!--            "            <td>Edit</td>\n" +-->
+<!--            "            <td>Delete</td>\n" +-->
+<!--            "        </tr>";-->
+<!--        for (let i = 0; i < blogs.length; i++) {-->
+<!--            content += getBlog(blogs[i], i + 1);-->
+<!--        }-->
+<!--        $('#tableBlog').html(content);-->
+<!--    }-->
+<!--    function getBlog(blog, status) {-->
+<!--        return ` <tr>` +-->
+<!--            `<td>${status}</td>` +-->
+<!--            `<th><a href="/blogs/view?id=${blog.id}">${blog.title}</a></th>` +-->
+<!--            `<td>${blog.content}</td>` +-->
+<!--            `<td>${blog.category.name}</td>` +-->
+<!--            `<td>${blog.date}</td>` +-->
+<!--            `<td><a href="/blogs/edit?id=${blog.id}">Edit</a></td>` +-->
+<!--            `<td><a href="/blogs/delete?id=${blog.id}">Delete</a></td>` +-->
+<!--            `</tr>`;-->
+<!--    }-->
+<!--    $(document).ready(function (){-->
+<!--        $.ajax({-->
+<!--            type: "GET",-->
+<!--            url: `/api/blogs`,-->
+<!--            success: function (data){-->
+<!--                let list = data.content;-->
+<!--                tableBlog(list);-->
+<!--            }-->
+<!--        });-->
+<!--        $('#btnNext').click(function (){-->
+<!--            let search = $('#search').val();-->
+<!--            let page= parseInt($('#page').val())+1;-->
+<!--            $('#page').val(page);-->
+<!--            $.ajax({-->
+<!--                type:"GET",-->
+<!--                url:`/api/blogs?page=${page}&search=${search}`,-->
+<!--                success:function (data){-->
+<!--                    tableBlog(data.content)-->
+<!--                }-->
+<!--            })-->
+<!--        })-->
+<!--    })-->
+<!--</script>-->
+
+
+<table class="table table-dark table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Date</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <th:block th:each="blog : ${blogs}">
+        <tr>
+            <td th:text="${blog.id}"></td>
+            <td th:text="${blog.title}"></td>
+            <td th:text="${blog.content}"></td>
+            <td th:text="${blog.author}"></td>
+            <td th:if="${blog.category}" th:text="${blog.category.name}"></td>
+            <td th:text="${blog.date}"></td>
+            <td><a th:href="@{/edit/__${blog.id}__}" class="btn btn-primary">Edit</a></td>
+            <td>
+                <button type="button" class="btn btn-danger buttonDelete" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" th:data1="${blog.id}" th:data2="${blog.id}"
+                        onclick="del(this.getAttribute('data1'),this.getAttribute('data2'))">
+                    Delete
+                </button>
+            </td>
+        </tr>
+    </th:block>
+</table>
+<div>
+    <a th:href="@{'/blogs'(page=${blogs.number - 1})}" th:if="${blogs.hasPrevious()}">Previous</a>
+    <span th:text="${blogs.number + 1}"></span>/<span th:text="${blogs.totalPages}"></span>
+    <a th:href="@{'/blogs'(page=${blogs.number + 1})}" th:if="${blogs.hasNext()}">Next</a>
+</div>
+
+<!-- Button trigger modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/delete" method="post">
+                    <input type="hidden" id="blogId" name="id" readonly>
+                    <p id="blogId2"></p>
+                    <p id="blogTitle"></p>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary"> Delete</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function del(id, name) {
+        document.getElementById("blogId").value = id;
+        console.log(id)
+        document.getElementById("blogTitle").innerText = name;
+        document.getElementById("blogId2").innerText = id;
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
