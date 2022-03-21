@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{customer.title}"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div>
+    Language: <a href="?lang=en">English</a> | <a href="?lang=vi">VietNamese</a>
+</div>
+<a href="/customers/create">Create new customer</a>
+<table border="1">
+    <tr>
+        <th th:text="#{customer.FirstName_label}"></th>
+        <th th:text="#{customer.LastName_label}"></th>
+        <th th:text="#{customer.Edit}">Edit</th>
+        <th th:text="#{customer.Delete}">Delete</th>
+    </tr>
+    <th:block th:each="customer : ${customers}">
+        <tr>
+            <td th:text="${customer.firstName}"></td>
+            <td th:text="${customer.lastName}"></td>
+            <td><a th:href="@{/customers/edit/__${customer.id}__}" class="btn btn-primary">Edit</a></td>
+            <td>
+                <button type="button" class="btn btn-danger buttonDelete" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" th:data1="${customer.id}"
+                        th:data2="${customer.firstName}"
+                        onclick="del(this.getAttribute('data1'),this.getAttribute('data2'))">
+                    Delete
+                </button>
+            </td>
+        </tr>
+    </th:block>
+</table>
+<!-- Button trigger modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/customers/delete" method="get">
+                    <input type="hidden" id="customerId" name="id" readonly>
+                    <p id="customerId2"></p>
+                    <p id="customerName"></p>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary"> Delete</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function del(id, name) {
+        document.getElementById("customerId").value = id;
+        document.getElementById("customerName").innerText = name;
+        document.getElementById("customerId2").innerText = id;
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
