@@ -1,6 +1,7 @@
 package com.example.case_study.model.customer;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "customerType")
@@ -10,8 +11,8 @@ public class CustomerType {
     private int customerTypeId;
     private String customerTypeName;
 
-    @OneToMany(mappedBy = "customerType")
-    private Set<Customer> customers;
+    @OneToMany(mappedBy = "customerTypeId")
+    private List<Customer> customers;
 
     public CustomerType() {
     }

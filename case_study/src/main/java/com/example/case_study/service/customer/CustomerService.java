@@ -13,16 +13,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CustomerService implements ICustomerService{
+public class CustomerService implements ICustomerService {
     @Autowired
     private ICustomerRepository customerRepository;
 
     @Autowired
     private ICustomerTypeIdRepository customerTypeIdRepository;
-    
+
+
     @Override
     public Page<Customer> findAll(String keyword, Pageable pageable) {
-        return customerRepository.findAllByKeyWord(keyword,pageable);
+        return customerRepository.findAllByKeyWord(keyword, pageable);
     }
 
     @Override
@@ -32,16 +33,18 @@ public class CustomerService implements ICustomerService{
 
     @Override
     public void save(Customer customer) {
-
+        customerRepository.save(customer);
     }
 
     @Override
-    public void remove(Long id) {
-
+    public void remove(String id) {
+        Customer customer = this.findById(id);
+        customer.setFlag(false);
+        save(customer);
     }
 
     @Override
     public List<CustomerType> listCustomerType() {
-        return null;
+        return customerTypeIdRepository.findAll();
     }
 }
