@@ -7,7 +7,7 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<h1>Customer List</h1>
+<h1 class="d-flex justify-content-center">List customer</h1>
 <div>
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
@@ -26,17 +26,22 @@
         </div>
     </nav>
 </div>
+<div>
+    <div th:if="${msg}">
+        <span th:text="${msg}"></span>
+    </div>
+</div>
 <table class="table table-dark table-striped">
     <tr>
         <th>Id</th>
         <th>Name</th>
         <th>BirthDay</th>
-        <th>Gender</th>
-        <th>IdCard</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Address</th>
-        <th>Customer type</th>
+<!--        <th>Gender</th>-->
+<!--        <th>IdCard</th>-->
+<!--        <th>Phone</th>-->
+<!--        <th>Email</th>-->
+<!--        <th>Address</th>-->
+<!--        <th>Customer type</th>-->
         <th>View</th>
         <th>Edit</th>
         <th>Delete</th>
@@ -46,13 +51,13 @@
         <td th:text="${customer.customerId}"></td>
         <td th:text="${customer.customerName}"></td>
         <td th:text="${customer.customerBirth}"></td>
-        <td th:text="${customer.customerGender}"></td>
-        <td th:text="${customer.customerIdCard}"></td>
-        <td th:text="${customer.customerPhone}"></td>
-        <td th:text="${customer.customerEmail}"></td>
-        <td th:text="${customer.customerAddress}"></td>
-        <td th:text="${customer.customerTypeId.customerTypeName}"></td>
-        <td><a href="#" class="btn btn-warning">View</a></td>
+<!--        <td th:text="${customer.customerGender}"></td>-->
+<!--        <td th:text="${customer.customerIdCard}"></td>-->
+<!--        <td th:text="${customer.customerPhone}"></td>-->
+<!--        <td th:text="${customer.customerEmail}"></td>-->
+<!--        <td th:text="${customer.customerAddress}"></td>-->
+<!--        <td th:text="${customer.customerTypeId.customerTypeName}"></td>-->
+        <td><a th:href="@{customer/detail-customer(id = ${customer.customerId})}" class="btn btn-warning">Detail</a></td>
         <td><a th:href="@{customer/edit-customer(id = ${customer.customerId})}" class="btn btn-primary">Edit</a></td>
         <td>
             <button type="button" class="btn btn-danger buttonDelete" data-bs-toggle="modal"

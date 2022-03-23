@@ -1,4 +1,4 @@
-package com.example.case_study.model;
+package com.example.case_study.model.contract;
 
 import com.example.case_study.model.customer.Customer;
 import com.example.case_study.model.employee.Employee;

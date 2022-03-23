@@ -7,76 +7,69 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<h1>Edit customer</h1>
-<div class="container d-flex">
-    <form th:action="@{/customer/edit-customer}" th:object="${customerDto}" method="post"  novalidate="novalidate">
-        <div class="form-group row">
-            <label for="inputId" class="col-sm-3 col-form-label">Id</label>
-            <div class="col-sm-6">
-                <p class="form-control" id="inputId" th:text="${customerDto.customerId}"></p>
-                <input type="hidden" th:field="*{customerId}">
-                <small style="color: red"  th:errors="*{customerId}"></small>
-            </div>
-        </div>
+<h1 class="d-flex justify-content-center">Edit customer</h1>
+<div class="d-flex justify-content-center">
+    <form th:action="@{/customer/edit-customer}" th:object="${customerDto}" method="post">
+        <input type="hidden" th:field="*{customerId}">
 
-        <div class="form-group row">
+        <div class="form-group row mt-3">
             <label for="inputName" class="col-sm-3 col-form-label">Name</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputName" th:field="*{customerName}">
+                <input type="text" class="form-control" id="inputName" th:field="*{customerName}" style="width: 280px">
                 <small style="color: red"  th:errors="*{customerName}"></small>
             </div>
         </div>
-        <div class="form-group row">
+
+        <div class="form-group row mt-3">
             <label for="inputDate" class="col-sm-3 col-form-label">BirthDay</label>
             <div class="col-sm-6">
-                <input type="date" class="form-control" id="inputDate" th:field="*{customerBirth}">
-                <small  style="color: red"  th:errors="*{customerBirth}"></small>
+                <input type="date" class="form-control" id="inputDate" th:field="*{customerBirth}" style="width: 280px">
+                <small  style="color: red"  th:errors="*{customerBirth}" ></small>
             </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row mt-3">
             <label class="col-sm-3 col-form-label">Gender</label>
-            <div class="col-sm-6">
-                <input type="radio" th:field="*{customerGender}"  value="male">Male <br>
-                <input type="radio" th:field="*{customerGender}" value="female">Female <br>
-                <input type="radio" th:field="*{customerGender}" value="other">Other <br>
+            <div class="col-sm-8">
+                <input type="radio" th:field="*{customerGender}" value="nam"><label th:text="Nam" style="width: 70px"></label>
+                <input type="radio" th:field="*{customerGender}" value="nu"><label th:text="Nu" style="width: 90px"></label>
+                <input type="radio" th:field="*{customerGender}" value="khac"><label th:text="Khac" ></label>
             </div>
         </div>
-        <br>
 
-        <div class="form-group row">
+        <div class="form-group row mt-3">
             <label for="inputIdCard" class="col-sm-3 col-form-label">Id card</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputIdCard" th:field="*{customerIdCard}">
+                <input type="text" class="form-control" id="inputIdCard" th:field="*{customerIdCard}" style="width: 280px">
                 <small style="color: red"  th:errors="*{customerIdCard}"></small>
             </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row mt-3">
             <label for="inputPhone" class="col-sm-3 col-form-label">Phone Number</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputPhone" th:field="*{customerPhone}">
+                <input type="text" class="form-control" id="inputPhone" th:field="*{customerPhone}" style="width: 280px">
                 <small style="color: red"  th:errors="*{customerPhone}"></small>
             </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row mt-3">
             <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputEmail" th:field="*{customerEmail}">
+                <input type="text" class="form-control" id="inputEmail" th:field="*{customerEmail}" style="width: 280px">
                 <small style="color: red"  th:errors="*{customerEmail}"></small>
             </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row mt-3">
             <label for="inputAddress" class="col-sm-3 col-form-label">Address</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputAddress" th:field="*{customerAddress}">
+                <input type="text" class="form-control" id="inputAddress" th:field="*{customerAddress}" style="width: 280px">
                 <small style="color: red"  th:errors="*{customerAddress}"></small>
             </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row mt-3">
             <label for="inputType" class="col-sm-3 col-form-label">Type customer</label>
             <div class="col-sm-6">
                 <select id="inputType" th:field="*{customerTypeId}">
@@ -87,7 +80,7 @@
         </div>
 
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary"> Edit Create</button>
+            <button type="submit" class="btn btn-primary"> Create Create</button>
             <a href="/customer" class="btn btn-secondary" data-bs-dismiss="modal">Back to list</a>
         </div>
     </form>

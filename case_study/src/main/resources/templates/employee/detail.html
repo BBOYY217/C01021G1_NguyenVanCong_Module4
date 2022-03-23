@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<h1 class="d-flex justify-content-center">Create employee</h1>
+<div class="d-flex justify-content-center">
+    <form th:action="@{/employee/detail-employee}"  method="post" >
+        <input type="hidden" th:field="*{employee.employeeId}">
+
+        <div class="form-group row mt-3">
+            <label for="inputName" class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-6">
+                <label class="form-control" id="inputName" th:text="*{employee.employeeName}" style="width: 280px"></label>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="inputDate" class="col-sm-3 col-form-label">BirthDay</label>
+            <div class="col-sm-6">
+                <label  class="form-control" id="inputDate" th:text="*{employee.employeeBirth}" style="width: 280px"></label>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="inputIdCard" class="col-sm-3 col-form-label">Id card</label>
+            <div class="col-sm-6">
+                <label class="form-control" id="inputIdCard" th:text="*{employee.employeeIdCard}" style="width: 280px"></label>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="inputSalary" class="col-sm-3 col-form-label">Salary</label>
+            <div class="col-sm-6">
+                <label  class="form-control" id="inputSalary" th:text="*{employee.employeeSalary}" style="width: 280px"></label>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="inputPhone" class="col-sm-3 col-form-label">Phone Number</label>
+            <div class="col-sm-6">
+                <label  class="form-control" id="inputPhone" th:text="*{employee.employeePhone}" style="width: 280px"></label>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-6">
+                <label class="form-control" id="inputEmail" th:text="*{employee.employeeEmail}" style="width: 280px"></label>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="inputAddress" class="col-sm-3 col-form-label">Address</label>
+            <div class="col-sm-6">
+                <label class="form-control" id="inputAddress" th:text="*{employee.employeeAddress}" style="width: 280px"></label>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="position" class="col-sm-3 col-form-label">Position</label>
+            <div class="col-sm-6">
+                <label class="form-control" id="position" th:text="*{employee.positionId.positionName}" style="width: 280px"></label>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="education" class="col-sm-3 col-form-label">Education Degree</label>
+            <div class="col-sm-6">
+                <label class="form-control" id="education" th:text="*{employee.educationDegreeId.educationDegreeName}" style="width: 280px"></label>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="division" class="col-sm-3 col-form-label">Division</label>
+            <div class="col-sm-6">
+                <label class="form-control" id="division" th:text="*{employee.divisionId.divisionName}" style="width: 280px"></label>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <a href="/employee" class="btn btn-secondary" data-bs-dismiss="modal">Back to list</a>
+        </div>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,13 +1,17 @@
 package com.example.case_study.model.employee;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "employee")
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employeeId;
+    @GeneratedValue(generator = "id_gen_employee")
+    @GenericGenerator(name = "id_gen_employee", parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "NV-"), strategy = "com.example.case_study.model.employee.IdGenerator")
+    private String employeeId;
+
     private String employeeName;
     private String employeeBirth;
     private String employeeIdCard;
@@ -33,7 +37,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int employeeId, String employeeName, String employeeBirth, String employeeIdCard, String employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, boolean flag, Position positionId, EducationDegree educationDegreeId, Division divisionId) {
+    public Employee(String employeeId, String employeeName, String employeeBirth, String employeeIdCard, String employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, boolean flag, Position positionId, EducationDegree educationDegreeId, Division divisionId) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeBirth = employeeBirth;
@@ -48,11 +52,11 @@ public class Employee {
         this.divisionId = divisionId;
     }
 
-    public int getEmployeeId() {
+    public String getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
 

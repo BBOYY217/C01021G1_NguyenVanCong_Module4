@@ -96,4 +96,10 @@ public class CustomerController {
         return  "redirect:/customer";
     }
 
+    @GetMapping("/detail-customer")
+    public  String view(@RequestParam String id,Model model){
+        model.addAttribute("customer",customerService.findById(id));
+        return "customer/detail";
+    }
+
 }
