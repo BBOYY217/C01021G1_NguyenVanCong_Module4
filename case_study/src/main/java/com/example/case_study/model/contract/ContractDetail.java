@@ -1,65 +1,33 @@
 package com.example.case_study.model.contract;
 
-import com.example.case_study.model.AttachService;
-import com.example.case_study.model.contract.Contract;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "contractDetail")
 public class ContractDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int contractDetailId;
+    private Long contractDetailId;
 
-    @OneToMany(mappedBy = "contractId")
-    private List<Contract> contractId;
+    @ManyToOne(targetEntity = Contract.class)
+    @JoinColumn(name = "contract_id", referencedColumnName = "contractId")
+    private Contract contract;
 
-    @OneToMany(mappedBy = "attachServiceId")
-    private List<AttachService> attachServiceId;
+    @ManyToOne(targetEntity = AttachService.class)
+    @JoinColumn(name = "attach_service_id", referencedColumnName = "attachServiceId")
+    private AttachService attachService;
 
     private int quantity;
 
     public ContractDetail() {
     }
 
-    public ContractDetail(int contractDetailId, List<Contract> contractId, List<AttachService> attachServiceId, int quantity) {
+    public ContractDetail(Long contractDetailId, Contract contract, AttachService attachService, int quantity) {
         this.contractDetailId = contractDetailId;
-        this.contractId = contractId;
-        this.attachServiceId = attachServiceId;
+        this.contract = contract;
+        this.attachService = attachService;
         this.quantity = quantity;
     }
 
-    public int getContractDetailId() {
-        return contractDetailId;
-    }
 
-    public void setContractDetailId(int contractDetailId) {
-        this.contractDetailId = contractDetailId;
-    }
-
-    public List<Contract> getContractId() {
-        return contractId;
-    }
-
-    public void setContractId(List<Contract> contractId) {
-        this.contractId = contractId;
-    }
-
-    public List<AttachService> getAttachServiceId() {
-        return attachServiceId;
-    }
-
-    public void setAttachServiceId(List<AttachService> attachServiceId) {
-        this.attachServiceId = attachServiceId;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 }

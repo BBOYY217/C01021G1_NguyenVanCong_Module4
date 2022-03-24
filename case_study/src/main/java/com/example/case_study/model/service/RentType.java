@@ -1,6 +1,9 @@
 package com.example.case_study.model.service;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "rentType")
@@ -10,6 +13,10 @@ public class RentType {
     private int rentTypeId;
     private String rentTypeName;
     private Double rentTypeCost;
+
+    @OneToMany(mappedBy = "rentType")
+    @JsonBackReference
+    List<Service> serviceList;
 
     public RentType() {
     }
@@ -43,4 +50,5 @@ public class RentType {
     public void setRentTypeCost(Double rentTypeCost) {
         this.rentTypeCost = rentTypeCost;
     }
+
 }

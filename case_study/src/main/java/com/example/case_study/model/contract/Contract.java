@@ -3,15 +3,19 @@ package com.example.case_study.model.contract;
 import com.example.case_study.model.customer.Customer;
 import com.example.case_study.model.employee.Employee;
 import com.example.case_study.model.service.Service;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table
+@Table(name = "contract")
 public class Contract {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int contractId;
+    @GeneratedValue(generator = "id_gen_contract")
+    @GenericGenerator(name = "id_gen_contract", parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "HD-"), strategy = "com.example.case_study.model.contract.IdGenerator")
+
+    private String contractId;
     private String startDate;
     private String endDate;
     private double contractDeposit;
@@ -29,10 +33,14 @@ public class Contract {
     @JoinColumn(name = "Service_id",referencedColumnName = "serviceId" )
     private Service Service;
 
+    @OneToMany(mappedBy = "contract")
+    private Set<ContractDetail> contractDetails;
+
+
     public Contract() {
     }
 
-    public Contract(int contractId, String startDate, String endDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, com.example.case_study.model.service.Service service) {
+    public Contract(String contractId, String startDate, String endDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, com.example.case_study.model.service.Service service, Set<ContractDetail> contractDetails) {
         this.contractId = contractId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -41,13 +49,14 @@ public class Contract {
         this.employee = employee;
         this.customer = customer;
         Service = service;
+        this.contractDetails = contractDetails;
     }
 
-    public int getContractId() {
+    public String getContractId() {
         return contractId;
     }
 
-    public void setContractId(int contractId) {
+    public void setContractId(String contractId) {
         this.contractId = contractId;
     }
 

@@ -1,59 +1,52 @@
-package com.example.case_study.model.service;
+package com.example.case_study.dto;
 
-import com.example.case_study.model.contract.Contract;
-import org.hibernate.annotations.GenericGenerator;
+import com.example.case_study.model.service.RentType;
+import com.example.case_study.model.service.ServiceType;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
-@Entity
-@Table(name = "service")
-public class Service {
-    @Id
-    @GeneratedValue (generator = "id_gen_service")
-    @GenericGenerator(name = "id_gen_service", parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "DV-"), strategy = "com.example.case_study.model.service.IdGenerator")
+public class ServiceDto implements Validator {
+
     private String serviceId;
+
+    @NotBlank(message = "Hãy nhập tên")
     private String serviceName;
+
+    @NotBlank(message = "Khu vực trống")
+    @Min(value = 1, message = "Khu vực phải là số dương.")
     private String serviceArea;
+
+    @NotBlank(message = "Giá không được để trống.")
+    @Min(value = 1, message = "Giá phải là số dương.")
     private String serviceCost;
+
+    @NotBlank(message = "Số lượng người không được để trống.")
+    @Min(value = 1, message = "Số lượng người ít nhất là 1 .")
     private String serviceMaxPeople;
 
-    @ManyToOne
-    @JoinColumn(name = "rent_type_id" ,referencedColumnName = "rentTypeId")
     private RentType rentType;
-
-    @ManyToOne
-    @JoinColumn(name = "service_type_id" ,referencedColumnName = "serviceTypeId")
     private ServiceType serviceType;
 
+    @NotBlank(message = "Hãy nhập số phòng")
+    @Pattern(regexp = "^([1-9])([0-9]*)$",
+            message = "Số lượng phòng phải là một số nguyên dương")
     private String standardRoom;
+
+    @NotBlank(message = "Hãy nhập mô tả sự tiện lợi")
     private String descriptionOtherConvenience;
+
+    @NotBlank(message = "Khu vục hồ bơi không dược để trống")
     private String poolArea;
+
+    @NotBlank(message = "Số tầng không được để trống.")
+    @Min(value = 1, message = "Số tầng phải là số dương.")
     private String numberOfFloor;
+
     private boolean flag;
-
-    @OneToMany(mappedBy = "customer")
-    private List<Contract> contract;
-
-
-    public Service() {
-    }
-
-    public Service(String serviceId, String serviceName, String serviceArea, String serviceCost, String serviceMaxPeople, RentType rentType, ServiceType serviceType, String standardRoom, String descriptionOtherConvenience, String poolArea, String numberOfFloor, boolean flag, List<Contract> contract) {
-        this.serviceId = serviceId;
-        this.serviceName = serviceName;
-        this.serviceArea = serviceArea;
-        this.serviceCost = serviceCost;
-        this.serviceMaxPeople = serviceMaxPeople;
-        this.rentType = rentType;
-        this.serviceType = serviceType;
-        this.standardRoom = standardRoom;
-        this.descriptionOtherConvenience = descriptionOtherConvenience;
-        this.poolArea = poolArea;
-        this.numberOfFloor = numberOfFloor;
-        this.flag = flag;
-        this.contract = contract;
-    }
 
     public String getServiceId() {
         return serviceId;
@@ -151,11 +144,13 @@ public class Service {
         this.flag = flag;
     }
 
-    public List<Contract> getContract() {
-        return contract;
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
     }
 
-    public void setContract(List<Contract> contract) {
-        this.contract = contract;
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }

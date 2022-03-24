@@ -1,9 +1,11 @@
 package com.example.case_study.model.customer;
 
+import com.example.case_study.model.contract.Contract;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -26,10 +28,13 @@ public class Customer {
     private  String customerAddress;
     private boolean flag;
 
+    @OneToMany(mappedBy = "customer")
+    private List<Contract> contract;
+
     public Customer() {
     }
 
-    public Customer(String customerId, CustomerType customerTypeId, String customerName, String customerBirth, String customerGender, String customerIdCard, String customerPhone, String customerEmail, String customerAddress, boolean flag) {
+    public Customer(String customerId, CustomerType customerTypeId, String customerName, String customerBirth, String customerGender, String customerIdCard, String customerPhone, String customerEmail, String customerAddress, boolean flag, List<Contract> contract) {
         this.customerId = customerId;
         this.customerTypeId = customerTypeId;
         this.customerName = customerName;
@@ -40,6 +45,7 @@ public class Customer {
         this.customerEmail = customerEmail;
         this.customerAddress = customerAddress;
         this.flag = flag;
+        this.contract = contract;
     }
 
     public String getCustomerId() {
@@ -120,5 +126,13 @@ public class Customer {
 
     public void setFlag(boolean flag) {
         this.flag = flag;
+    }
+
+    public List<Contract> getContract() {
+        return contract;
+    }
+
+    public void setContract(List<Contract> contract) {
+        this.contract = contract;
     }
 }

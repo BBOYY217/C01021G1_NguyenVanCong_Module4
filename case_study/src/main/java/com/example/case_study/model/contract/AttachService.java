@@ -1,32 +1,36 @@
-package com.example.case_study.model;
+package com.example.case_study.model.contract;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "attachService")
 public class AttachService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int attachServiceId;
+    private Long attachServiceId;
     private double attachServiceCost;
     private int attachServiceUnit;
     private String attachServiceStatus;
 
+    @OneToMany(mappedBy = "attachService")
+    private Set<ContractDetail> contractDetails;
+
     public AttachService() {
     }
 
-    public AttachService(int attachServiceId, double attachServiceCost, int attachServiceUnit, String attachServiceStatus) {
+    public AttachService(Long attachServiceId, double attachServiceCost, int attachServiceUnit, String attachServiceStatus) {
         this.attachServiceId = attachServiceId;
         this.attachServiceCost = attachServiceCost;
         this.attachServiceUnit = attachServiceUnit;
         this.attachServiceStatus = attachServiceStatus;
     }
 
-    public int getAttachServiceId() {
+    public Long getAttachServiceId() {
         return attachServiceId;
     }
 
-    public void setAttachServiceId(int attachServiceId) {
+    public void setAttachServiceId(Long attachServiceId) {
         this.attachServiceId = attachServiceId;
     }
 

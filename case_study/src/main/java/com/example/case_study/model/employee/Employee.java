@@ -1,8 +1,10 @@
 package com.example.case_study.model.employee;
 
+import com.example.case_study.model.contract.Contract;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "employee")
@@ -21,6 +23,9 @@ public class Employee {
     private String employeeAddress;
     private boolean flag;
 
+    @OneToMany(mappedBy = "employee")
+    private List<Contract> contract;
+
     @ManyToOne
     @JoinColumn(name = "position_id",referencedColumnName = "positionId")
     private Position positionId;
@@ -37,7 +42,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String employeeId, String employeeName, String employeeBirth, String employeeIdCard, String employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, boolean flag, Position positionId, EducationDegree educationDegreeId, Division divisionId) {
+    public Employee(String employeeId, String employeeName, String employeeBirth, String employeeIdCard, String employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, boolean flag, List<Contract> contract, Position positionId, EducationDegree educationDegreeId, Division divisionId) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeBirth = employeeBirth;
@@ -47,6 +52,7 @@ public class Employee {
         this.employeeEmail = employeeEmail;
         this.employeeAddress = employeeAddress;
         this.flag = flag;
+        this.contract = contract;
         this.positionId = positionId;
         this.educationDegreeId = educationDegreeId;
         this.divisionId = divisionId;
@@ -148,4 +154,12 @@ public class Employee {
         this.flag = flag;
     }
 
+    public List<Contract> getContract() {
+
+        return contract;
+    }
+
+    public void setContract(List<Contract> contract) {
+        this.contract = contract;
+    }
 }

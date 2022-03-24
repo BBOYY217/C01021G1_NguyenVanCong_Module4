@@ -1,7 +1,6 @@
 package com.example.case_study.dto;
 
 import com.example.case_study.model.customer.CustomerType;
-import com.example.case_study.model.customer.CustomerType;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
