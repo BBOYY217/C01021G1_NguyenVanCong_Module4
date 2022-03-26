@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="col-2">
+                <a href="/contract/create-contract"  class="btn btn-outline-primary">Create new Contract</a>
+            </div>
+            <div class="col-2">
+                <a href="/" class="btn btn-outline-primary">Back to Home</a>
+            </div>
+            <div class="col-8">
+            </div>
+        </div>
+    </nav>
+</div>
+<div>
+    <div th:if="${msg}">
+        <span th:text="${msg}"></span>
+    </div>
+</div>
+<table class="table table-dark table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Deposit</th>
+        <th>Total money</th>
+        <th>Employee</th>
+        <th>Customer</th>
+        <th>Service</th>
+        <!--        <th>View</th>-->
+        <th>Edit</th>
+<!--        <th>Delete</th>-->
+    </tr>
+    <tbody>
+    <tr th:each="contract :${contracts}">
+        <td th:text="${contract.contractId}"></td>
+        <td th:text="${contract.startDate}"></td>
+        <td th:text="${contract.endDate}"></td>
+        <td th:text="${contract.contractDeposit + '$'}"></td>
+        <td th:text="${contract.contractTotalMoney + '$'}"></td>
+        <td th:text="${contract.employee.employeeName}"></td>
+        <td th:text="${contract.customer.customerName}"></td>
+        <td th:text="${contract.service.serviceName}"></td>
+        <!--        <td><a th:href="@{service/detail-service(id = ${service.serviceId})}" class="btn btn-warning">Detail</a></td>-->
+        <td><a th:href="@{contract/edit-contract(id = ${contract.contractId})}" class="btn btn-primary">Edit</a></td>
+<!--        <td>-->
+<!--            <button type="button" class="btn btn-danger buttonDelete" data-bs-toggle="modal"-->
+<!--                    data-bs-target="#exampleModal" th:data1="${contract.contractId}"-->
+<!--                    onclick="del(this.getAttribute('data1'))">Delete-->
+<!--&lt;!&ndash;                onclick="del(this.getAttribute('data1'),this.getAttribute('data2'))">Delete&ndash;&gt;-->
+
+<!--            </button>-->
+<!--        </td>-->
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <a class="btn btn-info" th:href="@{/contract(page=${contracts.number - 1})}"
+       th:if="${contracts.hasPrevious()}">Previous</a>
+
+    <span th:text="${contracts.number+1}"></span>/<span th:text="${contracts.totalPages}"></span>
+
+    <a class="btn btn-info" th:href="@{/customer(page=${contracts.number + 1})}"
+       th:if="${contracts.hasNext()}">Next</a>
+</div>
+
+<!--&lt;!&ndash; Button trigger modal &ndash;&gt;-->
+<!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <form action="/contract/delete" method="post">-->
+<!--                    <input type="hidden" id="contractId" name="id" readonly>-->
+<!--                    <p id="contractId2"></p>-->
+<!--&lt;!&ndash;                    <p id="employeeName"></p>&ndash;&gt;-->
+<!--                    <div class="modal-footer">-->
+<!--                        <button type="submit" class="btn btn-primary"> Delete</button>-->
+<!--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    function del(id, name) {-->
+<!--        document.getElementById("contractId").value = id;-->
+<!--        // document.getElementById("serviceName").innerText = name;-->
+<!--        document.getElementById("contractId2").innerText = id;-->
+<!--    }-->
+<!--</script>-->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

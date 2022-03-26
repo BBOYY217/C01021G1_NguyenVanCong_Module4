@@ -1,4 +1,6 @@
-package com.example.case_study.model.contract;
+package com.example.case_study.model.contract_detail;
+
+import com.example.case_study.model.contract_detail.ContractDetail;
 
 import javax.persistence.*;
 import java.util.Set;

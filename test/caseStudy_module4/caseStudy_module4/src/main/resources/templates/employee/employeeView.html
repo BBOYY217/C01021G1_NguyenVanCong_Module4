@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="employee/layout :: head"></head>
+<body>
+<h3>View Customer</h3>
+<p>
+    <a th:href="@{/employeeList}">
+        Back to employee list
+    </a>
+</p>
+<div id="detail">
+    <div>
+        <label>Employee Name</label>
+        <input type="text" th:field="*{employee.employeeName}"/>
+
+    </div>
+    <div>
+        <label>Employee Birthday</label>
+        <input type="date" th:field="*{employee.employeeBirthday}"/>
+    </div>
+    <div>
+        <label>Employee IdCard</label>
+        <input type="text" th:field="*{employee.employeeIdCard}"/>
+    </div>
+    <div>
+        <label>Salary</label>
+        <input type="text" th:field="*{employee.salary}"/>
+    </div>
+    <div>
+        <label>Phone</label>
+        <input type="text" th:field="*{employee.employeePhone}"/>
+    </div>
+    <div>
+        <label>Email</label>
+        <input type="text" th:field="*{employee.email}"/>
+    </div>
+    <div>
+        <label>Address</label>
+        <input type="text" th:field="*{employee.address}"/>
+    </div>
+<!--    <div>-->
+<!--        <label>Position</label>-->
+<!--        <select th:field="*{employee.position.id}">-->
+<!--            <option th:each=" item : ${position}" th:value="${item.id}" th:text="${item.positionName}">-->
+<!--            </option>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label>Division</label>-->
+<!--        <select th:field="*{division.id}">-->
+<!--            <option th:each=" divisons : ${division}" th:value="${divisons.id}" th:text="${divisons.divisionName}">-->
+<!--            </option>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label>Education</label>-->
+<!--        <select th:field="*{education.id}">-->
+<!--            <option th:each=" educations : ${education}" th:value="${educations.id}" th:text="${educations.educationName}">-->
+<!--            </option>-->
+<!--        </select>-->
+<!--    </div>-->
+</div>
+<footer th:replace="employee/layout :: footer"></footer>
+</body>
+</html>

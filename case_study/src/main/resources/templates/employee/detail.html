@@ -36,7 +36,7 @@
         <div class="form-group row mt-3">
             <label for="inputSalary" class="col-sm-3 col-form-label">Salary</label>
             <div class="col-sm-6">
-                <label  class="form-control" id="inputSalary" th:text="*{employee.employeeSalary}" style="width: 280px"></label>
+                <label  class="form-control" id="inputSalary" th:text="*{employee.employeeSalary + '$'}" style="width: 280px"></label>
             </div>
         </div>
 

@@ -52,7 +52,7 @@
         <td th:text="${service.serviceId}"></td>
         <td th:text="${service.serviceName}"></td>
         <td th:text="${service.serviceArea}"></td>
-        <td th:text="${service.serviceCost}"></td>
+        <td th:text="${service.serviceCost + '$'}"></td>
         <td th:text="${service.serviceMaxPeople}"></td>
         <td th:text="${service.rentType.rentTypeName}"></td>
         <td th:text="${service.serviceType.serviceTypeName}"></td>
@@ -73,7 +73,7 @@
 </table>
 
 <div>
-    <a class="btn btn-info" th:href="@{/customer(page=${services.number - 1})}"
+    <a class="btn btn-info" th:href="@{/service(page=${services.number - 1})}"
        th:if="${services.hasPrevious()}">Previous</a>
 
     <span th:text="${services.number+1}"></span>/<span th:text="${services.totalPages}"></span>

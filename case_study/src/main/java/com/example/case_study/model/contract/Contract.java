@@ -1,5 +1,6 @@
 package com.example.case_study.model.contract;
 
+import com.example.case_study.model.contract_detail.ContractDetail;
 import com.example.case_study.model.customer.Customer;
 import com.example.case_study.model.employee.Employee;
 import com.example.case_study.model.service.Service;
@@ -14,12 +15,12 @@ public class Contract {
     @Id
     @GeneratedValue(generator = "id_gen_contract")
     @GenericGenerator(name = "id_gen_contract", parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "HD-"), strategy = "com.example.case_study.model.contract.IdGenerator")
-
     private String contractId;
+
     private String startDate;
     private String endDate;
-    private double contractDeposit;
-    private double contractTotalMoney;
+    private Double contractDeposit;
+    private Double contractTotalMoney;
 
     @ManyToOne
     @JoinColumn(name = "employee_id",referencedColumnName = "employeeId" )
@@ -36,11 +37,13 @@ public class Contract {
     @OneToMany(mappedBy = "contract")
     private Set<ContractDetail> contractDetails;
 
+    private Boolean flag;
+
 
     public Contract() {
     }
 
-    public Contract(String contractId, String startDate, String endDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, com.example.case_study.model.service.Service service, Set<ContractDetail> contractDetails) {
+    public Contract(String contractId, String startDate, String endDate, double contractDeposit, double contractTotalMoney, Employee employee, Customer customer, com.example.case_study.model.service.Service service, Set<ContractDetail> contractDetails, boolean flag) {
         this.contractId = contractId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -50,6 +53,7 @@ public class Contract {
         this.customer = customer;
         Service = service;
         this.contractDetails = contractDetails;
+        this.flag = flag;
     }
 
     public String getContractId() {
@@ -76,19 +80,19 @@ public class Contract {
         this.endDate = endDate;
     }
 
-    public double getContractDeposit() {
+    public Double getContractDeposit() {
         return contractDeposit;
     }
 
-    public void setContractDeposit(double contractDeposit) {
+    public void setContractDeposit(Double contractDeposit) {
         this.contractDeposit = contractDeposit;
     }
 
-    public double getContractTotalMoney() {
+    public Double getContractTotalMoney() {
         return contractTotalMoney;
     }
 
-    public void setContractTotalMoney(double contractTotalMoney) {
+    public void setContractTotalMoney(Double contractTotalMoney) {
         this.contractTotalMoney = contractTotalMoney;
     }
 
@@ -114,5 +118,21 @@ public class Contract {
 
     public void setService(com.example.case_study.model.service.Service service) {
         Service = service;
+    }
+
+    public Set<ContractDetail> getContractDetails() {
+        return contractDetails;
+    }
+
+    public void setContractDetails(Set<ContractDetail> contractDetails) {
+        this.contractDetails = contractDetails;
+    }
+
+    public Boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
     }
 }

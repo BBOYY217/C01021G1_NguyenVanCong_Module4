@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<h1 class="d-flex justify-content-center">Create contract</h1>
+<div class="d-flex justify-content-center">
+    <form th:action="@{/contract/create-contract}" th:object="${contractDto}" method="post">
+        <input type="hidden" th:field="*{contractId}">
+
+        <div class="form-group row mt-3">
+            <label for="inputStartDate" class="col-sm-3 col-form-label">Start date</label>
+            <div class="col-sm-6">
+                <input type="date" class="form-control" id="inputStartDate" th:field="*{startDate}" style="width: 280px">
+                <small style="color: red"  th:errors="*{startDate}"></small>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="inputEnđate" class="col-sm-3 col-form-label">End date</label>
+            <div class="col-sm-6">
+                <input type="date" class="form-control" id="inputEnđate" th:field="*{endDate}" style="width: 280px">
+                <small  style="color: red"  th:errors="*{endDate}" ></small>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="inputDeposit" class="col-sm-3 col-form-label">Deposit</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="inputDeposit" th:field="*{contractDeposit}" style="width: 280px">
+                <small style="color: red"  th:errors="*{contractDeposit}"></small>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="inputTotalMoney" class="col-sm-3 col-form-label">Total money</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="inputTotalMoney" th:field="*{contractTotalMoney}" style="width: 280px">
+                <small style="color: red"  th:errors="*{contractTotalMoney}"></small>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="inputEmployee" class="col-sm-3 col-form-label">Employee</label>
+            <div class="col-sm-6">
+                <select id="inputEmployee" th:field="*{employee}" style="width: 280px;height: 35px">
+                    <option th:each="employees :${employee}" th:value="${employees.employeeId}"
+                            th:text="${employees.employeeName}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="inputCustomer" class="col-sm-3 col-form-label">Customer</label>
+            <div class="col-sm-6">
+                <select id="inputCustomer" th:field="*{customer}" style="width: 280px;height: 35px" >
+                    <option th:each="customers :${customer}" th:value="${customers.customerId}"
+                            th:text="${customers.customerName}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="inputService" class="col-sm-3 col-form-label">Service</label>
+            <div class="col-sm-6">
+                <select id="inputService" th:field="*{service}" style="width: 280px;height: 35px">
+                    <option th:each="services :${service}" th:value="${services.serviceId}"
+                            th:text="${services.serviceName}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary"> Create Create</button>
+            <a href="/contract" class="btn btn-secondary" data-bs-dismiss="modal">Back to list</a>
+        </div>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

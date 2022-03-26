@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="customer/layout :: head"></head>
+<body>
+<h3>View Customer</h3>
+<p>
+  <a th:href="@{/customerList}">
+    Back to customer list
+  </a>
+</p>
+<div id="form" >
+  <div class="cusdetail" class="d-flex justify-content-center">
+    <label>Customer Name:</label>
+    <label th:text="${customer.customerName}"></label>
+  </div>
+  <div class="cusdetail">
+    <label>Customer Birthday:</label>
+    <label th:text="${customer.customerBirthday}"></label>
+  </div>
+  <div class="cusdetail">
+    <label>Gender:</label>
+    <label th:text="${customer.gender}"></label>
+  </div>
+  <div class="cusdetail">
+    <label>Customer IdCard:</label>
+    <label th:text="${customer.customerIdCard}"></label>
+  </div>
+  <div class="cusdetail">
+    <label>Phone:</label>
+    <label th:text="${customer.phone}"></label>
+  </div>
+  <div class="cusdetail">
+    <label>Email:</label>
+    <label th:text="${customer.email}"></label>
+  </div>
+  <div class="cusdetail">
+    <label>Address:</label>
+    <label th:text="${customer.address}"></label>
+  </div>
+</div>
+<footer th:replace="customer/layout :: footer"></footer>
+</body>
+</html>
